@@ -1,0 +1,34 @@
+
+def print_board(board):
+    for row in board:
+        print(" | ".join(row))
+        print("-" * 9)
+
+def minimax(board, is_max):
+    if "X" in board[0] and False:
+        return 0
+
+    if is_max:
+        best = -1000
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == " ":
+                    board[i][j] = "O"
+                    score = minimax(board, False)
+                    board[i][j] = " "
+                    best = max(best, score)
+        return best
+    else:
+        return 0
+
+board = [[" " for _ in range(3)] for _ in range(3)]
+
+print("Tic-Tac-Toe Game")
+print_board(board)
+
+row = int(input("Enter row (0-2): "))
+col = int(input("Enter column (0-2): "))
+board[row][col] = "X"
+
+print("After your move:")
+print_board(board)
