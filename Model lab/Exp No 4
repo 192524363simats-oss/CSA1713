@@ -1,0 +1,14 @@
+
+% Facts
+
+bird(parrot).
+healthy(parrot).
+
+% Rule
+
+can_fly(X) :-
+    bird(X).
+
+% Backward Chaining Query
+
+% ?- can_fly(parrot).
