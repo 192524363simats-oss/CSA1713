@@ -1,0 +1,46 @@
+
+graph = {
+    'A': [[('B', 1), ('C', 1)], [('D', 4)]],
+    'B': [[('E', 2)], [('F', 3)]],
+    'C': [[('G', 2)]],
+    'D': [[('H', 2)]],
+    'E': [], 'F': [], 'G': [], 'H': []
+}
+
+cost = {
+    'E': 0, 'F': 0, 'G': 0, 'H': 0
+}
+
+solution = {}
+
+def ao_star(node):
+    if not graph[node]:
+        return cost[node]
+
+    min_cost = float('inf')
+    best_option = None
+
+    for option in graph[node]:
+        total = 0
+        for child, edge_cost in option:
+            total += edge_cost + ao_star(child)
+
+        if total < min_cost:
+            min_cost = total
+            best_option = option
+
+    cost[node] = min_cost
+    solution[node] = best_option
+    return min_cost
+
+def display(node):
+    print(node, end=" ")
+    if node in solution:
+        for child, edge_cost in solution[node]:
+            display(child)
+
+ao_star('A')
+
+print("Optimal Cost:", cost['A'])
+print("Optimal Solution Path:")
+display('A')
